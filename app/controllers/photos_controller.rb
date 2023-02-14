@@ -19,7 +19,16 @@ url_id = params.fetch("photo_id")
   end
 
   def delete
+    the_id=params.fetch("deleted_photo_id")
 
-    render({:template => "photos_templates/delete.html.erb"})
+    matching_photos = Photo.where( :id=> the_id)
+
+    @the_photo = matching_photos.first
+
+    @the_photo.destroy
+
+    #render({:template => "photos_templates/delete.html.erb"})
+
+    redirect_to("/photos")
   end
 end
