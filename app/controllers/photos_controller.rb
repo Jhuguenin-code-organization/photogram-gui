@@ -48,4 +48,50 @@ url_id = params.fetch("photo_id")
   redirect_to("/photos/" + a_new_photo.id.to_s)
     #render({:template => "photos_templates/insert.html.erb"})
   end
+
+  def update
+
+    the_id=params.fetch("updated_photo_id")
+
+    matching_photos = Photo.where({ :id => the_id})
+
+    the_photo = matching_photos.first
+
+    input_image = params.fetch("query_image")
+    input_caption = params.fetch("query_caption")
+
+    the_photo.image = input_image
+    the_photo.caption = input_caption
+  
+    the_photo.save
+
+    next_url = "/photos/" + the_photo.id.to_s
+    
+    redirect_to(next_url)
+  end
+
+  def comment
+    the_id = params.fetch("comment_id")
+
+    matching_comments = Comment.where({ :id => the_id})
+
+    @the_comment = matching_comments.first
+    
+    input_photo_id = params.fetch("query_photo_id")
+    input_author_id = params.fetch("query_author_id")
+    input_comment = params.fetch("query_comment")
+
+    a_new_comment = Comment.new
+
+    a_new_comment.photo_id = input_photo_id
+    a_new_comment.author_id = input_author_id
+    a_new_comment.body = input_comment
+  
+    a_new_comment.save
+    
+
+    next_url = "/photos/" + a_new_comment.id.to_s
+    
+    redirect_to(next_url)
+  end
 end
