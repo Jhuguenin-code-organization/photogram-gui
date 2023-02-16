@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get("/", { :controller => "application", :action => "homepage"})
   #users
   get("/users", { :controller => "users", :action => "index"})
+
   get("/users/:path_username", { :controller => "users", :action => "show"})
 #photos
   get("/photos", { :controller => "photos", :action => "index"})
@@ -19,4 +20,10 @@ Rails.application.routes.draw do
 
   #post comment
   get("/add_comment/:comment_id", {:controller => "photos", :action => "comment"})
+
+  #add user
+  get("/add_user", {:controller => "users", :action => "add"})
+
+  #update user
+  get("/update_user/:updated_user_id", {:controller => "users", :action => "update"})
 end

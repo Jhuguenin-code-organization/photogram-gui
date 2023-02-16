@@ -71,11 +71,6 @@ url_id = params.fetch("photo_id")
   end
 
   def comment
-    the_id = params.fetch("comment_id")
-
-    matching_comments = Comment.where({ :id => the_id})
-
-    @the_comment = matching_comments.first
     
     input_photo_id = params.fetch("query_photo_id")
     input_author_id = params.fetch("query_author_id")
@@ -90,7 +85,7 @@ url_id = params.fetch("photo_id")
     a_new_comment.save
     
 
-    next_url = "/photos/" + a_new_comment.id.to_s
+    next_url = "/photos/" + input_photo_id.to_s
     
     redirect_to(next_url)
   end
